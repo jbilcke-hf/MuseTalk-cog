@@ -1,0 +1,56 @@
+# Configuration for Cog ⚙️
+# Reference: https://cog.run/yaml
+
+build:
+  # set to true if your model requires a GPU
+  gpu: true
+  cuda: "11.8"
+
+  # a list of ubuntu apt packages to install
+  #system_packages:
+  #   - "libgl1-mesa-glx"
+  #   - "libglib2.0-0"
+
+  # python version in the form '3.11' or '3.11.4'
+  python_version: "3.11"
+
+  # a list of packages in the format <package-name>==<version>
+  python_packages:
+    - "torch==2.0.1"
+    - "torchvision==0.15.2"
+    - "torchaudio==2.0.2"
+    - "diffusers==0.27.2"
+    - "accelerate==0.28.0"
+    - "tensorflow==2.12.0"
+    - "tensorboard==2.12.0"
+    - "opencv-python==4.9.0.80"
+    - "soundfile==0.12.1"
+    - "transformers==4.39.2"
+    - "gdown"
+    - "requests"
+    - "imageio[ffmpeg]"
+    - "omegaconf"
+    - "ffmpeg-python"
+    - "gradio"
+    - "spaces"
+    - "moviepy"
+
+  # commands run after the environment is setup
+  run:
+    - "apt-get update -y"
+    - "apt-get install -y software-properties-common"
+    - "add-apt-repository -y ppa:ubuntuhandbook1/ffmpeg7"
+    - "apt-get update -y"
+    - "apt-get install ffmpeg libgl1-mesa-glx -y"
+    - "pip install --no-cache-dir -U openmim"
+    - "pip install --upgrade setuptools"
+    - "pip install chumpy"
+    - "mim install mmengine"
+    - "mim install 'mmcv>=2.0.1'"
+    - "mim install 'mmdet>=3.1.0'"
+    - "mim install 'mmpose>=1.1.0'"
+    - curl -o /usr/local/bin/pget -L "https://github.com/replicate/pget/releases/download/v0.0.6/pget" && chmod +x /usr/local/bin/pget
+  #   - "echo another command if needed"
+
+# predict.py defines how predictions are run on your model
+predict: "predict.py:Predictor"

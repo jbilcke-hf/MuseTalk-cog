@@ -8,3 +8,6 @@ models
 results/
 data/audio/*.wav
 data/video/*.mp4
+ffmpeg-7.0-amd64-static
+venv/
+.cog/
